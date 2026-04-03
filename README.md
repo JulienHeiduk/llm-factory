@@ -1,1 +1,65 @@
 # llm-factory
+
+LLM experimentation workspace: evaluation, deployment, quantization, and more.
+
+All experiments use **Qwen2.5-7B** served locally with [Ollama](https://ollama.com/) — no API key needed, fully offline.
+
+## Structure
+
+```
+llm-factory/
+├── evaluation/           # Benchmarks, metrics, model comparisons
+│   ├── notebooks/
+│   └── scripts/
+├── deployment/           # Serving, APIs, containerization
+│   ├── notebooks/
+│   └── scripts/
+├── quantization/         # Model compression and quantization experiments
+│   ├── notebooks/
+│   └── scripts/
+├── fine-tuning/          # Fine-tuning scripts and configs
+│   ├── notebooks/
+│   └── scripts/
+├── inference/            # Inference optimization and benchmarks
+│   ├── notebooks/
+│   └── scripts/
+├── data/
+│   ├── raw/              # Raw datasets
+│   └── processed/        # Cleaned/prepared datasets
+└── configs/              # Model and experiment configurations
+```
+
+## Evaluation
+
+Tutorials for evaluating RAG pipelines and LLM outputs using local models.
+
+### RAGAS
+
+Evaluate retrieval-augmented generation with the [RAGAS](https://github.com/explodinggradients/ragas) framework. Covers faithfulness, context precision/recall, factual correctness, semantic similarity, and custom metrics.
+
+- Notebook: [`evaluation/notebooks/ragas-evaluation-tutorial.ipynb`](evaluation/notebooks/ragas-evaluation-tutorial.ipynb)
+- Script: [`evaluation/scripts/ragas_evaluation.py`](evaluation/scripts/ragas_evaluation.py)
+
+```bash
+pip install ragas openai sentence-transformers
+python evaluation/scripts/ragas_evaluation.py
+```
+
+### DeepEval
+
+Evaluate LLM outputs with [DeepEval](https://github.com/confident-ai/deepeval). Covers faithfulness, answer relevancy, contextual precision/recall/relevancy, hallucination, bias, toxicity, G-Eval custom criteria, and batch evaluation.
+
+- Notebook: [`evaluation/notebooks/deepeval-evaluation-tutorial.ipynb`](evaluation/notebooks/deepeval-evaluation-tutorial.ipynb)
+- Script: [`evaluation/scripts/deepeval_evaluation.py`](evaluation/scripts/deepeval_evaluation.py)
+
+```bash
+pip install deepeval openai
+python evaluation/scripts/deepeval_evaluation.py
+```
+
+## Prerequisites
+
+```bash
+# Install Ollama and pull the model
+ollama pull qwen2.5:7b
+```
