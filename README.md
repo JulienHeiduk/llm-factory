@@ -57,6 +57,20 @@ pip install deepeval openai
 python evaluation/scripts/deepeval_evaluation.py
 ```
 
+## Inference
+
+### LangChain
+
+Build LLM applications with [LangChain](https://python.langchain.com/) and local Ollama models. Covers chat models, prompt templates, output parsers, LCEL chains, RAG pipelines, conversation memory, and agents with tools.
+
+- Notebook: [`inference/notebooks/langchain-tutorial.ipynb`](inference/notebooks/langchain-tutorial.ipynb)
+- Script: [`inference/scripts/langchain_tutorial.py`](inference/scripts/langchain_tutorial.py)
+
+```bash
+pip install langchain langchain-ollama langchain-community chromadb langgraph
+python inference/scripts/langchain_tutorial.py
+```
+
 ## Prerequisites
 
 ```bash
