@@ -71,6 +71,20 @@ pip install langchain langchain-ollama langchain-community chromadb langgraph
 python inference/scripts/langchain_tutorial.py
 ```
 
+### vLLM
+
+High-throughput LLM inference with [vLLM](https://docs.vllm.ai/). Covers offline inference, sampling parameters, chat completion, batch inference, OpenAI-compatible API server, streaming, and structured output (guided decoding).
+
+- Notebook: [`inference/notebooks/vllm-tutorial.ipynb`](inference/notebooks/vllm-tutorial.ipynb)
+- Script: [`inference/scripts/vllm_tutorial.py`](inference/scripts/vllm_tutorial.py)
+
+```bash
+pip install vllm openai
+python inference/scripts/vllm_tutorial.py
+```
+
+> Requires an NVIDIA GPU (~16 GB VRAM for 7B in float16). vLLM loads models directly from HuggingFace — no Ollama needed.
+
 ## Prerequisites
 
 ```bash
