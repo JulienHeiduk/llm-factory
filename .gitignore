@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 .claude/
+CLAUDE.md
+.venv/
+# uv.lock is intentionally NOT ignored — it is committed for reproducible syncs.

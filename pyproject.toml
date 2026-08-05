@@ -1,0 +1,55 @@
+[project]
+name = "llm-factory"
+version = "0.1.0"
+description = "LLM experimentation workspace: evaluation, inference, quantization, and more."
+readme = "README.md"
+requires-python = ">=3.12"
+
+# Every tutorial talks to Ollama through the OpenAI-compatible client, and the
+# Pydantic tutorial needs the [email] extra for EmailStr.
+dependencies = [
+    "openai>=2.0",
+    "pydantic[email]>=2.9",
+]
+
+# One group per tutorial, so you install only what you are running. Only the
+# `notebook` group is synced by default (see [tool.uv] below) — that plus the
+# base dependencies is everything the Pydantic tutorial needs.
+[dependency-groups]
+notebook = [
+    "jupyterlab>=4.2",
+    "ipykernel>=6.29",
+]
+
+# LangChain 1.x moves the APIs this tutorial uses (notably
+# `langchain_community.vectorstores.Chroma` and `langgraph.prebuilt.create_react_agent`),
+# so the stack is held at the 0.3 series the script was written against.
+langchain = [
+    "langchain>=0.3,<1.0",
+    "langchain-community>=0.3,<0.4",
+    "langchain-ollama>=0.3,<1.0",
+    "langchain-text-splitters>=0.3,<1.0",
+    "langgraph>=0.6,<1.0",
+    "chromadb>=1.0",
+]
+
+# ragas 0.4 still imports `langchain_community.chat_models.vertexai`, which was
+# removed in langchain-community 0.4 — pinning <0.4 keeps `import ragas` working.
+ragas = [
+    "ragas>=0.4",
+    "langchain-community>=0.3,<0.4",
+    "sentence-transformers>=3.0",
+]
+
+deepeval = [
+    "deepeval>=4.1",
+]
+
+[tool.uv]
+package = false                  # a workspace of tutorials, not an installable library
+default-groups = ["notebook"]
+
+# vLLM is deliberately absent: it is Linux + NVIDIA only, so it cannot resolve or
+# install on this machine and would drag a CUDA dependency tree into the lockfile.
+# On a GPU box, install it into the same environment with:
+#     uv pip install vllm
