@@ -48,6 +48,7 @@ llm-factory/
 │   └── deepeval/
 ├── inference/            # Building with LLMs, inference optimization
 │   ├── langchain/
+│   ├── langgraph-memory/
 │   ├── pydantic/
 │   └── vllm/
 ├── deployment/           # Serving, APIs, containerization      (empty)
@@ -111,6 +112,22 @@ Build LLM applications with [LangChain](https://python.langchain.com/) and local
 uv sync --group langchain
 uv run python inference/langchain/scripts/langchain_tutorial.py
 ```
+
+### LangGraph — Long-Term Agentic Memory
+
+Give an agent memory that survives the conversation, with [LangGraph](https://langchain-ai.github.io/langgraph/) and [LangMem](https://langchain-ai.github.io/langmem/). An email assistant that triages, drafts replies, and rewrites its own instructions from your feedback.
+
+The through-line: "memory" is three separate mechanisms — **semantic** (facts it looks up), **episodic** (past decisions replayed as few-shot examples), and **procedural** (instructions it follows and rewrites). Only the third one actually changes behaviour.
+
+- Notebook: [`inference/langgraph-memory/notebooks/langgraph-memory-tutorial.ipynb`](inference/langgraph-memory/notebooks/langgraph-memory-tutorial.ipynb)
+- Script: [`inference/langgraph-memory/scripts/langgraph_memory_tutorial.py`](inference/langgraph-memory/scripts/langgraph_memory_tutorial.py)
+
+```bash
+uv sync --group langgraph-memory
+uv run python inference/langgraph-memory/scripts/langgraph_memory_tutorial.py
+```
+
+> Embeddings come from sentence-transformers, not Ollama — the semantic store needs an embedding endpoint and Ollama only serves one when started with `--embeddings`.
 
 ### vLLM
 

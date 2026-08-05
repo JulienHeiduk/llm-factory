@@ -4,12 +4,13 @@ Building with LLMs and optimising how they run. All tutorials use a **local** Qw
 
 ## These three are layers, not competitors
 
-A common mistake is to treat this folder as a menu. It is a stack — a serious application uses all three at once, at different levels:
+A common mistake is to treat this folder as a menu. It is a stack — a serious application uses several of these at once, at different levels:
 
 | Layer | Tutorial | Question it answers |
 |---|---|---|
 | **Serving** | [`vllm/`](vllm/) | How do I run the model fast enough, on hardware I control? |
 | **Orchestration** | [`langchain/`](langchain/) | How do I wire prompts, retrieval, memory and tools into a pipeline? |
+| **Statefulness** | [`langgraph-memory/`](langgraph-memory/) | How does the agent remember, and actually change, across sessions? |
 | **Data contract** | [`pydantic/`](pydantic/) | How do I turn the model's text into typed data I can trust? |
 
 Read them in the order that matches your problem. If output keeps arriving in the wrong shape, start with **Pydantic** — it is the smallest and pays off immediately, whether or not you ever adopt a framework. If you are assembling a RAG or agent pipeline, **LangChain**. If a working prototype is too slow or too expensive per GPU, **vLLM**.
@@ -21,6 +22,7 @@ The bottom two also work fine without the middle: the Pydantic tutorial calls th
 | Folder | What it covers | Install |
 |---|---|---|
 | [`langchain/`](langchain/) | Chat models, prompts, output parsers, LCEL chains, RAG, memory, agents | `uv sync --group langchain` |
+| [`langgraph-memory/`](langgraph-memory/) | Long-term agentic memory: semantic, episodic and procedural, with LangGraph + LangMem | `uv sync --group langgraph-memory` |
 | [`pydantic/`](pydantic/) | Validating LLM output: field constraints, schema-guided generation, retry loops, nested models | `uv sync` |
 | [`vllm/`](vllm/) | Offline inference, sampling, batching, the API server, streaming, guided decoding | `uv pip install vllm` (GPU box) |
 
