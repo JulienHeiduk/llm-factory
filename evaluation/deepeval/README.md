@@ -2,6 +2,37 @@
 
 Evaluating LLM outputs with [DeepEval](https://github.com/confident-ai/deepeval), judged by a local Qwen2.5-7B model instead of a hosted API.
 
+## Why DeepEval?
+
+**The problem it addresses.** Prompt and model changes have no compiler. You tweak a system prompt to fix one case, ship it, and quietly regress four others — and nothing fails, because there is no test to fail. Traditional assertions do not help either: you cannot `assertEqual` a paragraph, and a regex that pins the exact wording breaks the moment the model rephrases.
+
+**What it gives you.** LLM evaluation shaped like unit testing. Metrics carry a `threshold`, produce a pass/fail plus a reason, and run under pytest, so quality checks live in CI next to everything else. The metric library spans correctness (faithfulness, relevancy, hallucination) and safety (bias, toxicity), and **G-Eval** lets you state a bespoke rubric in plain English — "penalise answers that give medical advice" — and have the judge apply it consistently.
+
+**Use it when**
+
+- You want a build to fail when a prompt change degrades output quality.
+- Your quality bar is a rubric, not a fixed string — G-Eval is the reason to be here.
+- You need safety screening (bias, toxicity) as a gate rather than an afterthought.
+- You are comparing two models or two prompts and want per-metric evidence.
+
+**Skip it when**
+
+- A deterministic check would do. If correctness means valid JSON or an exact ID, validate it with [Pydantic](../../inference/pydantic/README.md) or a regex — cheaper, instant, and never flaky.
+- Your question is specifically *where* a RAG pipeline fails. [RAGAS](../ragas/README.md) decomposes retrieval from generation more directly.
+- You cannot afford the calls. Every metric on every test case is one or more LLM invocations; a broad suite gets expensive against a paid API and slow against a local one.
+
+**In production.** Judged scores drift when the judge changes, so pin the judge model and treat any change to it as a re-baseline. Set thresholds from an observed distribution rather than intuition — start by recording scores without failing the build. Keep the gating suite small and the exploratory suite separate; you want CI minutes spent on the cases that actually catch regressions. Note that DeepEval will reach for OpenAI unless every metric is passed `model=`, which is the adapter this tutorial exists to build.
+
+## Alternatives
+
+| Instead of | Consider | Why |
+|---|---|---|
+| DeepEval for RAG | [RAGAS](../ragas/README.md) | Purpose-built to separate retrieval failures from generation failures |
+| Python test files | [promptfoo](https://www.promptfoo.dev/) | Declarative YAML evals and red-teaming, language-agnostic |
+| Local-only evaluation | [LangSmith](https://docs.smith.langchain.com/), [Phoenix](https://phoenix.arize.com/) | Datasets, tracing and eval history as a platform |
+| LLM-judged metrics | Human review on a small set | Still the ground truth every judge is calibrated against |
+| A framework | A hand-written judge prompt | For one or two criteria, a prompt plus a threshold is honest and transparent |
+
 ## Contents
 
 | Path | What it is |
