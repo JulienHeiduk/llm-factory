@@ -1,7 +1,7 @@
 """
 vLLM Tutorial (using Qwen2.5-7B)
 
-Requirements: pip install vllm openai
+Requirements: uv pip install vllm   (Linux + NVIDIA only, so it is not in uv.lock)
 Model: Qwen/Qwen2.5-7B-Instruct (downloaded from HuggingFace on first run)
 Hardware: NVIDIA GPU with ~16 GB VRAM
 
@@ -196,7 +196,7 @@ def demo_api_server():
     try:
         from openai import OpenAI
     except ImportError:
-        print("Install openai: pip install openai\n")
+        print("openai is a base dependency — run: uv sync\n")
         return
 
     client = OpenAI(base_url="http://localhost:8000/v1", api_key="unused")
@@ -242,7 +242,7 @@ def demo_streaming():
     try:
         from openai import OpenAI
     except ImportError:
-        print("Install openai: pip install openai\n")
+        print("openai is a base dependency — run: uv sync\n")
         return
 
     client = OpenAI(base_url="http://localhost:8000/v1", api_key="unused")

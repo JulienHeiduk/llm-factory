@@ -1,7 +1,7 @@
 """
 Evaluating RAG Pipelines with RAGAS (using Qwen2.5 locally)
 
-Requirements: pip install ragas openai sentence-transformers
+Requirements: uv sync --group ragas
 LLM: Qwen2.5-7B served locally with Ollama
 
 Pull the model before running:

@@ -1,7 +1,7 @@
 """
 LangChain Tutorial (using Qwen2.5 locally)
 
-Requirements: pip install langchain langchain-ollama langchain-community chromadb langgraph
+Requirements: uv sync --group langchain
 LLM: Qwen2.5-7B served locally with Ollama
 
 Pull the model before running:

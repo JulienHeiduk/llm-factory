@@ -1,7 +1,7 @@
 """
 Evaluating LLM Outputs with DeepEval (using Qwen2.5 locally)
 
-Requirements: pip install deepeval openai
+Requirements: uv sync --group deepeval
 LLM: Qwen2.5-7B served locally with Ollama
 
 Pull the model before running:
